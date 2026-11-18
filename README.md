@@ -48,3 +48,30 @@ LUNÉRA is a full-stack e-commerce web application built using modern web techno
 ## Project
 
 LUNÉRA – Full-Stack E-Commerce Website
+
+---
+
+## Project Screenshots
+
+### 1. Homepage
+![LUNÉRA Homepage](screenshots/homepage%20(2).png)
+
+### 2. Product Listing
+![Product Listing](screenshots/Product-listing.png)
+
+### 3. Shopping Bag
+![Shopping Bag](screenshots/Shipping-bag.png)
+
+### 4. Checkout & Order Section
+![Checkout](screenshots/Checkout%20%20Order%20Section.png)
+
+### 5. Admin Dashboard
+![Admin Dashboard](screenshots/Admin%20Dashboard.png)
+
+### 6. Order Management
+![Order Management](screenshots/Order%20Management.png)
+
+### 7. Products & Stock Management
+![Products and Stock](screenshots/Products%20%26%20Stock.png)
+
+---
