@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fbf8ff">
+    <title>Order Details | LUNÉRA</title>
+
+    <style>
+        :root {
+            --cream: #fbf8ff;
+            --plum: #30243b;
+            --orchid: #765684;
+            --gold: #c49b68;
+            --muted: #82768c;
+            --border: #e9dff0;
+            --green: #26764b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 24px;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--plum);
+            background: linear-gradient(135deg, #fbf8ff, #f0e5f7);
+        }
+
+        .logo {
+            display: block;
+            text-align: center;
+            margin: 8px auto 30px;
+            font: bold 30px Georgia, serif;
+            letter-spacing: 4px;
+            text-decoration: none;
+            color: var(--plum);
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        main {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .panel {
+            background: white;
+            padding: 30px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px #30243b0c;
+        }
+
+        h1, h2 {
+            font-family: Georgia, serif;
+            font-weight: normal;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 23px;
+            margin: 25px 0 12px;
+        }
+
+        .intro {
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        #message {
+            margin: 22px 0;
+            color: var(--muted);
+        }
+
+        .success-mark {
+            width: 58px;
+            height: 58px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #e8f6ed;
+            color: var(--green);
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .order-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .status {
+            display: inline-block;
+            background: #f0e5f7;
+            color: var(--orchid);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 13px;
+            text-transform: capitalize;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            margin-top: 22px;
+        }
+
+        .info-card {
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            min-width: 0;
+        }
+
+        .info-label {
+            display: block;
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            display: block;
+            overflow-wrap: anywhere;
+            white-space: pre-wrap;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .item-name {
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .item-meta {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .item-price {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            border: 1px solid var(--plum);
+            border-radius: 10px;
+            background: var(--plum);
+            color: white;
+            font: inherit;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .button.secondary {
+            background: white;
+            color: var(--orchid);
+            border-color: var(--border);
+        }
+
+        .button:hover {
+            opacity: 0.88;
+        }
+
+        @media (max-width: 550px) {
+            body {
+                padding: 14px;
+            }
+
+            .panel {
+                padding: 22px 16px;
+            }
+
+            h1 {
+                font-size: 29px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .item {
+                gap: 10px;
+            }
+
+            .item-price {
+                font-size: 14px;
+            }
+
+            .actions .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/" class="logo">LUNÉRA<span>.</span></a>
+
+    <main>
+        <section class="panel">
+            <div class="success-mark" aria-hidden="true">✓</div>
+
+            <h1>Order Details</h1>
+            <p class="intro">
+                Thank you for shopping with LUNÉRA. Here are your order details.
+            </p>
+
+            <p id="message" role="status" aria-live="polite">
+                Loading your order...
+            </p>
+
+            <div id="order-content" hidden>
+                <div class="order-top">
+                    <div>
+                        <strong id="order-number"></strong>
+                        <div class="info-label" id="order-date"></div>
+                    </div>
+
+                    <span class="status" id="order-status"></span>
+                </div>
+
+                <h2>Customer Information</h2>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <span class="info-label">Full Name</span>
+                        <span class="info-value" id="customer-name"></span>
+                    </div>
+
+                    <div class="info-card">
+                        <span class="info-label">Email Address</span>
+                        <span class="info-value" id="customer-email"></span>
+                    </div>
+
+                    <div class="info-card">
+                        <span class="info-label">Phone Number</span>
+                        <span class="info-value" id="customer-phone"></span>
+                    </div>
+
+                    <div class="info-card">
+                        <span class="info-label">Shipping Address</span>
+                        <span class="info-value" id="shipping-address"></span>
+                    </div>
+                </div>
+
+                <h2>Items Ordered</h2>
+                <div id="items-list"></div>
+
+                <div class="total-row">
+                    <span>Total Amount</span>
+                    <span id="total-amount"></span>
+                </div>
+
+                <div class="actions">
+                    <a class="button" href="/">Continue Shopping</a>
+                    <a class="button secondary" id="history-link"
+                       href="/order-history.html">My Orders</a>
+                </div>
+            </div>
+
+            <div id="error-actions" class="actions" hidden>
+                <a class="button" href="/order-history.html">Back to My Orders</a>
+                <a class="button secondary" href="/">Continue Shopping</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const message = document.getElementById("message");
+        const content = document.getElementById("order-content");
+        const errorActions = document.getElementById("error-actions");
+
+        function money(value) {
+            const amount = Number(value);
+
+            if (!Number.isFinite(amount)) {
+                return "৳0.00";
+            }
+
+            return "৳" + amount.toLocaleString("en-BD", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        function setText(id, value) {
+            document.getElementById(id).textContent =
+                value === null || value === undefined || value === ""
+                    ? "Not provided"
+                    : String(value);
+        }
+
+        function showError(text) {
+            message.textContent = text;
+            content.hidden = true;
+            errorActions.hidden = false;
+        }
+
+        function renderOrder(order) {
+            setText("order-number", "Order #" + order.id);
+            setText(
+                "order-date",
+                order.created_at
+                    ? "Placed: " + new Date(order.created_at).toLocaleString()
+                    : "Order date unavailable"
+            );
+            setText("order-status", order.status || "pending");
+
+            setText("customer-name", order.customer_name);
+            setText("customer-email", order.customer_email);
+            setText("customer-phone", order.customer_phone);
+            setText("shipping-address", order.shipping_address);
+
+            const itemsList = document.getElementById("items-list");
+            itemsList.replaceChildren();
+
+            (order.items || []).forEach(item => {
+                const row = document.createElement("div");
+                row.className = "item";
+
+                const description = document.createElement("div");
+
+                const name = document.createElement("div");
+                name.className = "item-name";
+                name.textContent = item.product_name || "Product";
+
+                const meta = document.createElement("div");
+                meta.className = "item-meta";
+                meta.textContent =
+                    money(item.price) + " × " + Number(item.quantity || 0);
+
+                description.append(name, meta);
+
+                const price = document.createElement("div");
+                price.className = "item-price";
+                price.textContent = money(item.subtotal);
+
+                row.append(description, price);
+                itemsList.appendChild(row);
+            });
+
+            setText("total-amount", money(order.total_amount));
+
+            const historyLink = document.getElementById("history-link");
+            const url = new URL("/order-history.html", location.origin);
+            url.searchParams.set("email", order.customer_email || "");
+            historyLink.href = url.pathname + url.search;
+
+            message.textContent = "Your order details loaded successfully.";
+            content.hidden = false;
+            errorActions.hidden = true;
+        }
+
+        async function loadOrder() {
+            const params = new URLSearchParams(location.search);
+            const id = params.get("id");
+            const email = params.get("email");
+
+            if (!id || !/^\d+$/.test(id) || !email) {
+                showError(
+                    "Order ID or checkout email is missing. Open this page from My Orders."
+                );
+                return;
+            }
+
+            message.textContent = "Loading your order...";
+            content.hidden = true;
+            errorActions.hidden = true;
+
+            try {
+                const url = new URL(
+                    "/api/orders/" + encodeURIComponent(id),
+                    location.origin
+                );
+                url.searchParams.set("email", email);
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (!response.ok || !data.success || !data.order) {
+                    throw new Error(
+                        data.message || "Unable to find this order."
+                    );
+                }
+
+                renderOrder(data.order);
+            } catch (error) {
+                showError(
+                    error.message || "Unable to load order details. Please try again."
+                );
+            }
+        }
+
+        loadOrder();
+    </script>
+</body>
+</html>
